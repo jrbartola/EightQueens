@@ -1,22 +1,26 @@
+import java.util.HashSet;
 import java.util.Set;
 
 /**
- * This class is used as an implementation of an n x n
+ * Abstract class used to define an n x n
  * board for the n-queens problem.
  *
  * @author    Jesse Bartola
  */
-public class Queens {
 
-    private char[][] matrix;
-    private final int dim;
-    private Set<Coordinate> queens;
+public abstract class Queens {
 
-    public Queens(int dim) {
-        matrix = new char[dim][dim];
-        this.dim = dim;
-    }
+    protected boolean[][] matrix;
+    protected int dim;
+    protected Set<Coordinate> queens;
 
+    /**
+     * The meat of our algorithm. Finds a valid solution
+     * to the n-queens problem with a specified board dimesion
+     * and prints the result to stdout.
+     *
+     */
+    public abstract void findQueens();
 
     /**
      * This method checks to see if the current queen
@@ -26,9 +30,44 @@ public class Queens {
      * @return  true if placement if valid, false otherwise
      */
     public boolean checkQueen(int row, int col) {
-        return false;
+
+        // Check row
+        for (int i = 0; i < dim; i++) {
+            if (i != col && matrix[row][i]) {
+                return false;
+            }
+        }
+
+        // Check column
+        for (int i = 0; i < dim; i++) {
+            if (i != row && matrix[i][col]) {
+                return false;
+            }
+        }
+
+        // Check forward diagonal
+        for (int i = row-1, j = col+1; i >= 0 && j < dim; i--, j++) {
+            if (matrix[i][j]) {
+                return false;
+            }
+        }
+
+        // Check reverse diagonal
+        for (int i = row-1, j = col-1; i >= 0 && j >= 0; i--, j--) {
+            if (matrix[i][j]) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
+
+    /**
+     * Creates a visual of the n-queens board from the given matrix
+     *
+     * @return a string representation of the queens board
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder((dim + 2) * dim);
@@ -36,7 +75,7 @@ public class Queens {
         for (int i = 0; i < dim; i++) {
 
             for (int j = 0; j < dim; j++) {
-                if (queens.contains(new Coordinate(dim, dim))) {
+                if (matrix[i][j]) {
                     sb.append('Q');
                 } else {
                     sb.append('-');
@@ -46,10 +85,5 @@ public class Queens {
             sb.append('\n');
         }
         return sb.toString();
-    }
-
-    public static void main(String[] args) {
-        Queens eightQueen = new Queens(8);
-
     }
 }

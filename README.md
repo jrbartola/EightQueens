@@ -1,2 +1,2 @@
 # EightQueens
-Java Implementation for the classic Eight Queens problem
+Java Implementation for the classic Eight QueensBoard problem
