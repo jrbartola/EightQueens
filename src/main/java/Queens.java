@@ -1,5 +1,4 @@
-import java.util.HashSet;
-import java.util.Set;
+import java.util.LinkedHashSet;
 
 /**
  * Abstract class used to define an n x n
@@ -12,7 +11,7 @@ public abstract class Queens {
 
     protected boolean[][] matrix;
     protected int dim;
-    protected Set<Coordinate> queens;
+    protected LinkedHashSet<Coordinate> queens;
 
     /**
      * The meat of our algorithm. Finds a valid solution
@@ -20,7 +19,7 @@ public abstract class Queens {
      * and prints the result to stdout.
      *
      */
-    public abstract void findQueens();
+    public abstract Queens nQueens(int col);
 
     /**
      * This method checks to see if the current queen
@@ -62,6 +61,25 @@ public abstract class Queens {
         return true;
     }
 
+    /**
+     * Places a coordinate with the specified row
+     * and column into the queens LinkedHashSet and
+     * set's its matrix value to true.
+     */
+
+    public void placeQueen(int row, int col) {
+        queens.add(new Coordinate(row, col));
+        matrix[row][col] = true;
+    }
+
+    /**
+     * Removes a queen from the specified row
+     * in the matrix and LinkedHashSet
+     */
+    public void removeQueen(int row, int col) {
+        queens.remove(new Coordinate(row, col));
+        matrix[row][col] = false;
+    }
 
     /**
      * Creates a visual of the n-queens board from the given matrix
