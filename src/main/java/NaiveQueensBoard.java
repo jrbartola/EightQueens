@@ -1,5 +1,4 @@
 import java.util.Arrays;
-import java.util.LinkedHashSet;
 
 /**
  * Created by Jesse on 1/6/2017.
@@ -11,7 +10,6 @@ public class NaiveQueensBoard extends Queens {
     public NaiveQueensBoard(int dim) {
         matrix = new boolean[dim][dim];
         this.dim = dim;
-        this.queens = new LinkedHashSet<>(dim);
 
         visited = new boolean[dim][dim];
         for (boolean[] row : matrix) {
@@ -23,10 +21,9 @@ public class NaiveQueensBoard extends Queens {
         }
     }
 
-    public NaiveQueensBoard(int dim, boolean[][] matrix, LinkedHashSet<Coordinate> q) {
+    public NaiveQueensBoard(int dim, boolean[][] matrix) {
         super();
         this.matrix = matrix;
-        this.queens = q;
     }
 
     /**

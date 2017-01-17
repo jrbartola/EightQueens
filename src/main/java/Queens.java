@@ -1,4 +1,3 @@
-import java.util.LinkedHashSet;
 
 /**
  * Abstract class used to define an n x n
@@ -9,9 +8,9 @@ import java.util.LinkedHashSet;
 
 public abstract class Queens {
 
+    protected int count;
     protected boolean[][] matrix;
     protected int dim;
-    protected LinkedHashSet<Coordinate> queens;
 
     /**
      * The meat of our algorithm. Finds a valid solution
@@ -68,8 +67,8 @@ public abstract class Queens {
      */
 
     public void placeQueen(int row, int col) {
-        queens.add(new Coordinate(row, col));
         matrix[row][col] = true;
+        count++;
     }
 
     /**
@@ -77,8 +76,8 @@ public abstract class Queens {
      * in the matrix and LinkedHashSet
      */
     public void removeQueen(int row, int col) {
-        queens.remove(new Coordinate(row, col));
         matrix[row][col] = false;
+        count--;
     }
 
     /**

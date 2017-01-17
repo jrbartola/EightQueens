@@ -10,13 +10,10 @@ import java.util.Set;
  */
 public class QueensBoard extends Queens {
 
-    private int count;
-
     public QueensBoard(int dim) {
-        count = 0;
-        matrix = new boolean[dim][dim];
+        this.count = 0;
+        this.matrix = new boolean[dim][dim];
         this.dim = dim;
-        this.queens = new LinkedHashSet<>(8);
     }
 
     public Queens nQueens(int col) {
@@ -27,7 +24,6 @@ public class QueensBoard extends Queens {
         for (int r = 0; r < dim; r++) {
             if (checkQueen(r, col)) {
                 placeQueen(r, col);
-                count++;
 
                 Queens fin = nQueens(col+1);
 
@@ -35,7 +31,6 @@ public class QueensBoard extends Queens {
                     return fin;
                 }
 
-                count--;
                 removeQueen(r, col);
             }
         }
@@ -44,7 +39,7 @@ public class QueensBoard extends Queens {
     }
 
     public static void main(String[] args) {
-        QueensBoard eightQueen = new QueensBoard(13);
+        QueensBoard eightQueen = new QueensBoard(8);
         System.out.println(eightQueen.nQueens(0));
     }
 
